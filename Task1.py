@@ -10,4 +10,4 @@ elif parameters[0] == '*':
     result = parameters[1] * parameters[2]
 elif parameters[0] == '/':
     result = parameters[1] / parameters[2]
-print(result)
+print(f'{parameters[1]} {parameters[0]} {parameters[2]} = {result}')

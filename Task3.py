@@ -1,5 +1,6 @@
 documents = [
     {"type": "passport", "number": "2207 876234", "name": "Василий Гупкин"},
+    {"type": "invoice", "number": "11-22"},
     {"type": "invoice", "number": "11-2", "name": "Геннадий Покемонов"},
     {"type": "insurance", "number": "10006", "name": "Аристарх Павлов"}
 ]
@@ -11,6 +12,7 @@ directories = {
 commands = {
     'p': 'people – команда, которая спросит номер документа и выведет имя человека, которому он принадлежит',
     'l': 'list – команда, которая выведет список всех документов',
+    'dh': 'document holder – команда, которая выведет список всех владельцев документов',
     's': 'shelf – команда, которая спросит номер документа и выведет номер полки, на которой он находится',
     'a': 'add – команда, которая добавит новый документ в каталог и в перечень полок, спросив его номер, тип, '
          'имя владельца и номер полки, на которой он будет храниться',
@@ -20,7 +22,15 @@ commands = {
     'h': 'help - выводит список доступных команд и их краткое описание',
     'q': 'quit - завершение работы программы'
 }
-
+def document_holder():
+    holder = ''
+    for index, doc in enumerate(documents, 1):
+        try:
+            holder = doc['name']
+        except KeyError:
+            print(f'№ п.п. {index} у документа {doc["number"]} не указан владелец')
+        else:
+            print(f'№ п.п. {index} его владелец {holder}')
 
 def verify_command(command):
     if command in commands:
@@ -189,6 +199,8 @@ def main():
             if user_command == 'q':
                 print('Работа с программой завершена.')
                 break
+            elif user_command == 'dh':
+                document_holder()
             elif user_command == 'p':
                 find_people_by_docnumber()
             elif user_command == 'l':
